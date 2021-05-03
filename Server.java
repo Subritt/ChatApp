@@ -43,14 +43,32 @@ class Server {
                         System.out.println("Client terminated the chat");
                         break;
                     }
+                    System.out.println("Client : " + msg);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
+        
+        new Thread(r1).start();
     }
 
     public void startWriting() {
+        Runnable r2 = () -> {
+            while(true) {
+                try {
+                    BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
+                    String content = br1.readLine();
+                    out.println(content);
+                    out.flush();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        new Thread(r2).start();
 	}
 
 
