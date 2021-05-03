@@ -135,7 +135,7 @@ public class Client extends JFrame{
                         socket.close();
                         break;
                     }
-                    // System.out.println("Server : " + msg);
+                    System.out.println("Server : " + msg);
                     displayArea.append("Server : " + msg + "\n");
                 } catch (IOException e) {
                     // e.printStackTrace();
