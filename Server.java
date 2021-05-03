@@ -40,12 +40,15 @@ class Server {
                 try {
                     msg = br.readLine();
                     if(msg.equals("exit")) {
-                        System.out.println("Client terminated the chat");
+                        System.out.println("Client terminated the chat!");
+                        socket.close(); // connection closed
                         break;
                     }
                     System.out.println("Client : " + msg);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    // e.printStackTrace();
+                    // System.out.println("e: Client terminated the chat!");
+                    break;
                 }
             }
         };
@@ -56,7 +59,7 @@ class Server {
     public void startWriting() {
         Runnable r2 = () -> {
             System.out.println("writer started...");
-            
+
             while(true) {
                 try {
                     BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
@@ -64,8 +67,16 @@ class Server {
                     out.println(content);
                     out.flush();
 
+                    if(content.equals("exit")) {
+                        System.out.println("Server terminated the chat!");
+                        socket.close();
+                        break;
+                    }
+                    
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    // e.printStackTrace();
+                    System.out.println("e: Server terminated the chat!");
+                    break;
                 }
             }
         };
