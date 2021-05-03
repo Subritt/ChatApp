@@ -31,6 +31,7 @@ class Server {
         }
     }
     
+    // Reader
     public void startReading() {
         Runnable r1 = () -> {
             System.out.println("reader started...");
@@ -56,6 +57,7 @@ class Server {
         new Thread(r1).start();
     }
 
+    // Writer
     public void startWriting() {
         Runnable r2 = () -> {
             System.out.println("writer started...");
@@ -72,10 +74,14 @@ class Server {
                         socket.close();
                         break;
                     }
+
+                    if(socket.isClosed()) {
+                        break;
+                    }
                     
                 } catch (Exception e) {
                     // e.printStackTrace();
-                    System.out.println("e: Server terminated the chat!");
+                    // System.out.println("e: Server terminated the chat!");
                     break;
                 }
             }
