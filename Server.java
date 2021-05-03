@@ -55,6 +55,8 @@ class Server {
 
     public void startWriting() {
         Runnable r2 = () -> {
+            System.out.println("writer started...");
+            
             while(true) {
                 try {
                     BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
